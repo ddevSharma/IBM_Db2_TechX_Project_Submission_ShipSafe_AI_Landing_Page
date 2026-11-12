@@ -4,7 +4,11 @@ export const SOURCE = "https://github.com/ddevSharma/IBM_Db2_TechX_Project_Submi
 export const VERSION = "3.0.0";
 export const VSIX = `shipsafe-${VERSION}.vsix`;
 export const WHEEL = `shipsafe-${VERSION}-py3-none-any.whl`;
-export const WHEEL_URL = `${REPO}/raw/main/public/downloads/${WHEEL}`;
+export const SITE = "https://shipsafe-bob.vercel.app";
+export const WHEEL_URL = `${SITE}/downloads/${WHEEL}`;
+export const VSIX_URL = `${SITE}/downloads/${VSIX}`;
+// Works in PowerShell, bash and zsh: the browser saves downloads to ~/Downloads.
+export const VSIX_PATH = `"$HOME/Downloads/${VSIX}"`;
 export const DB2_EXTENSION = "https://marketplace.visualstudio.com/items?itemName=IBM.db2-for-luw";
 
 export const TICKER = [

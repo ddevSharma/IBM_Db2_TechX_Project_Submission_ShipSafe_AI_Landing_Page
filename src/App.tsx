@@ -12,7 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
-import { DB2_EXTENSION, SOURCE, TICKER, TOOLS, VERSION, VSIX, WHEEL, WHEEL_URL } from "@/content";
+import { DB2_EXTENSION, SOURCE, TICKER, TOOLS, VERSION, VSIX, VSIX_PATH, WHEEL, WHEEL_URL } from "@/content";
 
 /* ------------------------------------------------------------------ bits */
 function CopyCommand({ cmd, className }: { cmd: string; className?: string }) {
@@ -371,8 +371,8 @@ function Start() {
                     <TabsList>
                       {[["bob", "IBM Bob"], ["vscode", "VS Code"], ["claude", "Claude Code"], ["cursor", "Cursor"]].map(([v, l]) => <TabsTrigger key={v} value={v}>{l}</TabsTrigger>)}
                     </TabsList>
-                    <TabsContent value="bob" className="mt-4"><CopyCommand cmd={`shipsafe connect bob\nbobide --install-extension ${VSIX}`} /></TabsContent>
-                    <TabsContent value="vscode" className="mt-4"><CopyCommand cmd={`code --install-extension ${VSIX}\nshipsafe connect vscode`} /></TabsContent>
+                    <TabsContent value="bob" className="mt-4"><CopyCommand cmd={`shipsafe connect bob\nbobide --install-extension ${VSIX_PATH}`} /></TabsContent>
+                    <TabsContent value="vscode" className="mt-4"><CopyCommand cmd={`code --install-extension ${VSIX_PATH}\nshipsafe connect vscode`} /></TabsContent>
                     <TabsContent value="claude" className="mt-4"><CopyCommand cmd="shipsafe connect claude" /></TabsContent>
                     <TabsContent value="cursor" className="mt-4"><CopyCommand cmd="shipsafe connect cursor" /></TabsContent>
                   </Tabs>
@@ -389,9 +389,9 @@ function Start() {
 /* -------------------------------------------------------------- downloads */
 function Downloads() {
   const items = [
-    { title: "Extension for Bob & VS Code", file: VSIX, href: `/downloads/${VSIX}`, note: "Problems panel, verified quick fix, SQL check, memory, status bar", cmd: `bobide --install-extension ${VSIX}` },
-    { title: "Python package", file: WHEEL, href: `/downloads/${WHEEL}`, note: "MCP server, CLI, guard, crew, Db2 schema and procedures", cmd: `pip install ${WHEEL}` },
-    { title: "Bob rules file", file: "shipsafe.md", href: "/downloads/shipsafe.md", note: "Drop into .bob/rules/ to make Bob call ShipSafe on its own", cmd: "shipsafe connect bob" },
+    { title: "Extension for Bob & VS Code", file: VSIX, href: `/downloads/${VSIX}`, note: "Problems panel, verified quick fix, SQL check, memory, status bar. Download it, then run this from any folder (VS Code: use code instead of bobide).", cmd: `bobide --install-extension ${VSIX_PATH}` },
+    { title: "Python package", file: WHEEL, href: `/downloads/${WHEEL}`, note: "MCP server, CLI, guard, crew, Db2 schema and procedures. Needs Python 3.11 to 3.13 (if your default is 3.14, run py -3.13 -m pip install … on Windows, python3.13 -m pip install … elsewhere). Install it first.", cmd: `pip install ${WHEEL_URL}` },
+    { title: "Bob rules file", file: "shipsafe.md", href: "/downloads/shipsafe.md", note: "Makes Bob call ShipSafe on its own. Run the command inside your project (after the Python package) or drop the file into .bob/rules/.", cmd: "shipsafe connect bob" },
   ];
   return (
     <section id="get" className="relative overflow-hidden border-t border-line py-28">
