@@ -9,6 +9,8 @@
 The landing page and download hub for ShipSafe, a free MCP add-on that keeps code written by
 IBM Bob (and VS Code, Claude Code, Cursor) production-ready, using IBM Db2 and local IBM Granite models.
 
+**Live: [https://shipsafe-bob.vercel.app](https://shipsafe-bob.vercel.app)**
+
 [Download the extension](public/downloads/shipsafe-3.0.0.vsix) ·
 [Download the Python package](public/downloads/shipsafe-3.0.0-py3-none-any.whl) ·
 [Source code](https://github.com/ddevSharma/IBM_Db2_TechX_Project_Submission/tree/submission/shipsafe-ai/submissions/shipsafe-ai) ·
