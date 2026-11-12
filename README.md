@@ -11,8 +11,8 @@ IBM Bob (and VS Code, Claude Code, Cursor) production-ready, using IBM Db2 and l
 
 **Live: [https://shipsafe-bob.vercel.app](https://shipsafe-bob.vercel.app)**
 
-[Download the extension](public/downloads/shipsafe-3.0.0.vsix) ·
-[Download the Python package](public/downloads/shipsafe-3.0.0-py3-none-any.whl) ·
+[Download the extension](public/downloads/shipsafe-3.1.0.vsix) ·
+[Download the Python package](public/downloads/shipsafe-3.1.0-py3-none-any.whl) ·
 [Source code](https://github.com/ddevSharma/IBM_Db2_TechX_Project_Submission/tree/submission/shipsafe-ai/submissions/shipsafe-ai) ·
 [Db2Hack submission](https://github.com/KunalGolaIBM/IBM_Db2_TechX_Project_Submission/pull/92)
 
@@ -38,8 +38,8 @@ Everything is free, open source (Apache-2.0) and runs locally.
 
 | File | Install |
 |---|---|
-| [`shipsafe-3.0.0.vsix`](public/downloads/shipsafe-3.0.0.vsix): extension for IBM Bob and VS Code | `bobide --install-extension shipsafe-3.0.0.vsix` or `code --install-extension shipsafe-3.0.0.vsix` |
-| [`shipsafe-3.0.0-py3-none-any.whl`](public/downloads/shipsafe-3.0.0-py3-none-any.whl): MCP server, CLI, Db2 schema | `pip install shipsafe-3.0.0-py3-none-any.whl` (Python 3.11–3.13) |
+| [`shipsafe-3.1.0.vsix`](public/downloads/shipsafe-3.1.0.vsix): extension for IBM Bob and VS Code | `bobide --install-extension shipsafe-3.1.0.vsix` or `code --install-extension shipsafe-3.1.0.vsix` |
+| [`shipsafe-3.1.0-py3-none-any.whl`](public/downloads/shipsafe-3.1.0-py3-none-any.whl): MCP server, CLI, Db2 schema | `pip install shipsafe-3.1.0-py3-none-any.whl` (Python 3.11–3.13) |
 | [`shipsafe.md`](public/downloads/shipsafe.md): IBM Bob rules file | drop into `.bob/rules/`, or run `shipsafe connect bob` |
 
 Quick start: get Db2 free with the IBM Db2 Developer Extension, `ollama pull granite4:micro` and

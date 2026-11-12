@@ -1,7 +1,7 @@
 // Single source for links and copy that must stay accurate.
 export const REPO = "https://github.com/ddevSharma/IBM_Db2_TechX_Project_Submission_ShipSafe_AI_Landing_Page";
 export const SOURCE = "https://github.com/ddevSharma/IBM_Db2_TechX_Project_Submission/tree/submission/shipsafe-ai/submissions/shipsafe-ai";
-export const VERSION = "3.0.0";
+export const VERSION = "3.1.0";
 export const VSIX = `shipsafe-${VERSION}.vsix`;
 export const WHEEL = `shipsafe-${VERSION}-py3-none-any.whl`;
 export const SITE = "https://shipsafe-bob.vercel.app";
