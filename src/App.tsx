@@ -28,7 +28,7 @@ function CopyCommand({ cmd, className }: { cmd: string; className?: string }) {
   };
   return (
     <div className={cn("flex min-w-0 items-stretch overflow-hidden rounded-xl border border-line bg-[#05070a]", className)}>
-      <pre className="min-w-0 flex-1 overflow-x-auto px-4 py-3 font-mono text-[13px] leading-relaxed text-fg">
+      <pre className="min-w-0 flex-1 whitespace-pre-wrap px-4 py-3 font-mono text-[13px] leading-relaxed text-fg [overflow-wrap:anywhere]">
         {cmd.split("\n").map((line, i) => (
           <div key={i}><span className="select-none text-faint">$ </span>{line}</div>
         ))}
@@ -390,7 +390,7 @@ function Start() {
 function Downloads() {
   const items = [
     { title: "Extension for Bob & VS Code", file: VSIX, href: `/downloads/${VSIX}`, note: "Problems panel, verified quick fix, SQL check, memory, status bar. Download it, then run this from any folder (VS Code: use code instead of bobide).", cmd: `bobide --install-extension ${VSIX_PATH}` },
-    { title: "Python package", file: WHEEL, href: `/downloads/${WHEEL}`, note: "MCP server, CLI, guard, crew, Db2 schema and procedures. Needs Python 3.11 to 3.13 (if your default is 3.14, run py -3.13 -m pip install … on Windows, python3.13 -m pip install … elsewhere). Install it first.", cmd: `pip install ${WHEEL_URL}` },
+    { title: "Python package", file: WHEEL, href: `/downloads/${WHEEL}`, note: "MCP server, CLI, guard, crew, Db2 schema and procedures. Needs Python 3.11 to 3.13; if your default is 3.14, start with py ‑3.13 ‑m pip (Windows) or python3.13 ‑m pip. Install it first.", cmd: `pip install ${WHEEL_URL}` },
     { title: "Bob rules file", file: "shipsafe.md", href: "/downloads/shipsafe.md", note: "Makes Bob call ShipSafe on its own. Run the command inside your project (after the Python package) or drop the file into .bob/rules/.", cmd: "shipsafe connect bob" },
   ];
   return (
