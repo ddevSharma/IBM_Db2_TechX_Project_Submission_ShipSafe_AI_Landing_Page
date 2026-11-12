@@ -71,8 +71,9 @@ npm run build      # static site in dist/
 
 ## Deploy
 
-The site deploys on **Netlify** straight from this repository: build command `npm run build`, publish
-directory `dist` (both already set in `netlify.toml`). Every push to `main` redeploys.
+**Vercel:** import this repository; `vercel.json` sets the Vite build (`npm run build` → `dist`) and the
+download and security headers. **Netlify** works too, with the same settings in `netlify.toml`.
+Every push to `main` redeploys.
 
 ## Updating the downloads
 
