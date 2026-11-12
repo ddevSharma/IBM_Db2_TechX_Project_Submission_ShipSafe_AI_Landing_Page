@@ -1,0 +1,59 @@
+@import "tailwindcss";
+@import "@fontsource/ibm-plex-sans/300.css";
+@import "@fontsource/ibm-plex-sans/400.css";
+@import "@fontsource/ibm-plex-sans/500.css";
+@import "@fontsource/ibm-plex-sans/600.css";
+@import "@fontsource/ibm-plex-sans/700.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+
+/* Black stage, signal-yellow for the one action that matters, a cold blue glow for depth. */
+@theme {
+  --color-ink: #000000;
+  --color-panel: #0b0d11;
+  --color-panel-2: #12161d;
+  --color-line: #232a35;
+  --color-fg: #f2f4f8;
+  --color-muted: #9aa4b2;
+  --color-faint: #5c6675;
+  --color-signal: #f2c94c;
+  --color-signal-ink: #0b0d11;
+  --color-glow: #3b6cff;
+  --color-block: #ff6b6b;
+  --color-warn: #f0b44c;
+  --color-clean: #3ddc97;
+  --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+
+:root { color-scheme: dark; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--color-ink);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+::selection { background: var(--color-signal); color: var(--color-signal-ink); }
+:focus-visible { outline: 2px solid var(--color-signal); outline-offset: 3px; border-radius: 6px; }
+h1, h2, h3 { text-wrap: balance; }
+
+.gutter {
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+}
+
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee { animation: marquee 48s linear infinite; }
+
+.grain::after {
+  content: "";
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(60% 50% at 50% 100%, rgb(59 108 255 / 0.35), transparent 70%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .marquee { animation: none; }
+}
