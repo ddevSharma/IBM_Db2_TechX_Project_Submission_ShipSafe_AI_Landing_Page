@@ -88,7 +88,7 @@ function Header() {
     window.addEventListener("scroll", on, { passive: true });
     return () => window.removeEventListener("scroll", on);
   }, []);
-  const links = [["#how", "How it works"], ["#powers", "Superpowers"], ["#start", "Start here"], ["#get", "Downloads"], ["#tools", "Tools"], ["#faq", "FAQ"]];
+  const links = [["#how", "How it works"], ["#powers", "Superpowers"], ["#start", "Start here"], ["#get", "Downloads"], ["#tools", "Tools"], ["#faq", "FAQ"], ["/pitch/", "Pitch"]];
   return (
     <header className={cn("sticky top-0 z-30 transition-colors", scrolled ? "border-b border-line bg-ink/90 backdrop-blur" : "bg-transparent")}>
       <div className="gutter mx-auto flex h-16 max-w-7xl items-center gap-6">

@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ShipSafe Pitch</title>
+<meta name="description" content="ShipSafe for IBM Bob: the finale pitch. Live-pitch flow with the video, or the full 9-slide deck.">
+<link rel="icon" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#000;--panel:#0e1117;--line:#262b36;--fg:#f2f4f8;--muted:#9aa3b2;--faint:#5b6475;--gold:#f2c94c;--blue:#5b85ff;--red:#ff5c5c;--green:#3ddc97;
+  --sans:"IBM Plex Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;background:var(--bg);color:var(--fg);font-family:var(--sans);overflow:hidden}
+#wrap{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+#stage{width:1280px;height:720px;position:relative;transform-origin:center;flex:none}
+.slide{position:absolute;inset:0;padding:56px 64px 70px;display:none;flex-direction:column;justify-content:center}
+.slide.on{display:flex;animation:in .45s ease}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.eyebrow{font-family:var(--mono);font-size:14px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+h1{font-size:76px;line-height:1.05;font-weight:700;letter-spacing:-.02em}
+h2{font-size:40px;line-height:1.15;font-weight:700;margin-top:14px;letter-spacing:-.01em}
+.gold{color:var(--gold)}.muted{color:var(--muted)}.faint{color:var(--faint)}
+.lead{font-size:24px;color:var(--muted);line-height:1.45}
+.grid{display:grid;gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 24px}
+.card h3{font-size:21px;margin-bottom:10px}
+.card p{font-size:16px;color:var(--muted);line-height:1.5}
+.code{font-family:var(--mono);font-size:15px;color:var(--fg);white-space:pre;margin-top:12px}
+.bad{border-color:var(--red)}.bad h3{color:var(--red)}
+.hero{border:2px solid var(--gold)}.hero h3{color:var(--gold)}
+.pts{float:right;font-family:var(--mono);font-size:13px;color:var(--faint)}
+.bar{border-left:4px solid var(--gold);padding-left:16px}
+.shippy{filter:drop-shadow(0 18px 40px rgba(242,201,76,.18))}
+.foot{position:absolute;left:64px;right:64px;bottom:26px;display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;color:var(--faint)}
+.pop>*{opacity:0;animation:pop .5s ease forwards}
+.pop>*:nth-child(1){animation-delay:.25s}.pop>*:nth-child(2){animation-delay:.9s}.pop>*:nth-child(3){animation-delay:1.55s}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+video{width:100%;height:100%;object-fit:contain;background:#000;border-radius:12px}
+.vidwrap{position:absolute;inset:0;padding:0}
+.missing{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;color:var(--muted);font-size:22px;text-align:center}
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 15px var(--sans);color:#000;background:var(--gold);border:0;border-radius:999px;padding:12px 22px;cursor:pointer;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.check{display:flex;gap:16px;align-items:flex-start;font-size:24px;line-height:1.35;margin-bottom:22px}
+.check b{font-family:var(--mono);color:var(--gold);font-size:20px;min-width:34px}
+.shot{border:1px solid var(--line);border-radius:12px;padding:6px;background:#0b0d12}
+.shot img{display:block;width:100%;border-radius:8px}
+/* chrome */
+#chooser{position:fixed;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:16px;background:radial-gradient(ellipse at top,#1a1505,#000 60%);text-align:center}
+#chooser img{width:150px}
+#chooser h1{font-size:clamp(30px,6vw,56px)}
+#chooser .opts{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.opt{width:min(340px,92vw);text-align:left;cursor:pointer;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;color:var(--fg);font:inherit;transition:border-color .2s,transform .2s}
+.opt:hover,.opt:focus-visible{border-color:var(--gold);transform:translateY(-2px);outline:none}
+.opt b{display:block;font-size:20px;margin-bottom:6px}.opt span{color:var(--muted);font-size:15px;line-height:1.45}
+#hud{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:10;display:flex;gap:8px;align-items:center;font-family:var(--mono);font-size:12px;color:var(--faint);background:rgba(14,17,23,.85);border:1px solid var(--line);border-radius:999px;padding:6px 10px;opacity:.15;transition:opacity .3s}
+#hud:hover,#hud:focus-within{opacity:1}
+#hud button{background:none;border:0;color:var(--fg);font:inherit;cursor:pointer;padding:4px 8px;border-radius:999px}
+#hud button:hover{background:var(--line)}
+#progress{position:fixed;top:0;left:0;height:3px;background:var(--gold);z-index:10;transition:width .3s}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<div id="chooser">
+  <img src="img/shippy-happy.png" alt="Shippy, the ShipSafe mascot" class="shippy">
+  <div><div class="eyebrow">ShipSafe for IBM Bob · finale</div><h1 style="margin-top:12px">Pick how to watch</h1></div>
+  <div class="opts">
+    <button class="opt" data-mode="live"><b>Live pitch</b><span>The 5-minute flow: hook, the 2-minute video, then the live demo and the close. This is what's presented on the call.</span></button>
+    <button class="opt" data-mode="deck"><b>Full deck</b><span>All 9 slides, including the proof in real IBM Bob, enforcement and the architecture.</span></button>
+  </div>
+  <div class="faint" style="font-size:14px">Arrow keys or tap to move · F for full screen · <a href="/" style="color:var(--muted)">back to the site</a></div>
+</div>
+
+<div id="wrap"><div id="stage"></div></div>
+
+<div id="hud">
+  <button id="prev" aria-label="Previous slide">&#8592;</button>
+  <span id="count">1 / 1</span>
+  <button id="next" aria-label="Next slide">&#8594;</button>
+  <button id="full" aria-label="Full screen">&#x26F6;</button>
+  <button id="menu" aria-label="Choose mode">Menu</button>
+</div>
+
+<!-- slide library: each template has an id; the modes pick from them -->
+<template id="t-hook">
+  <div class="eyebrow">DB2HACK finale · ShipSafe for IBM Bob</div>
+  <div style="display:flex;align-items:center;flex:1;gap:40px">
+    <div style="flex:1">
+      <h1>Who checks the code<br><span class="gold">your AI writes?</span></h1>
+      <p class="lead" style="margin-top:34px">Every editor has a spell-check. None of them has a ship-check.</p>
+    </div>
+    <img src="img/shippy-sleepy.png" alt="Shippy, asleep" class="shippy" style="width:250px">
+  </div>
+</template>
+
+<template id="t-problem">
+  <div class="eyebrow">The problem</div>
+  <h2>AI-written code compiles. It can still be dangerous.</h2>
+  <div class="grid pop" style="grid-template-columns:repeat(3,1fr);margin-top:40px">
+    <div class="card bad"><h3>SQL injection</h3><div class="code">sql = f"SELECT * FROM ORDERS
+       WHERE ID = '{order_id}'"</div></div>
+    <div class="card bad"><h3>Secret in source</h3><div class="code">API_KEY = "sk_live_9f8e7d6c5b4a"</div></div>
+    <div class="card bad"><h3>Shell injection</h3><div class="code">subprocess.run(cmd, shell=True)</div></div>
+  </div>
+  <p class="lead" style="margin-top:40px"><b style="color:var(--fg)">Even IBM Granite</b> misused the Db2 driver in our own tests.</p>
+  <p class="lead" style="margin-top:12px">Scanners catch this later, in CI. <b class="gold">The check happens at the wrong time.</b></p>
+</template>
+
+<template id="t-meet">
+  <div class="eyebrow">Meet ShipSafe</div>
+  <h2>A ship-check inside IBM Bob and every MCP IDE.</h2>
+  <div style="display:flex;gap:36px;margin-top:36px;align-items:center">
+    <div style="text-align:center;width:250px;flex:none">
+      <img src="img/shippy-happy.png" alt="Shippy waves" class="shippy" style="width:210px">
+      <p class="faint" style="font-size:14px;margin-top:10px">Shippy sets it all up: engine, IBM Db2, Granite, the agent.</p>
+    </div>
+    <div class="grid" style="grid-template-columns:1fr 1fr;flex:1">
+      <div class="card bar"><h3>Checks before writing</h3><p>The AI sends the file it is about to write. Verdict in about 0.4 s.</p></div>
+      <div class="card bar" style="border-left-color:var(--green)"><h3>Verified Granite fixes</h3><p>Local Granite fixes it. The fix only counts if it passes the same checks again.</p></div>
+      <div class="card bar" style="border-left-color:var(--blue)"><h3>SQL checked by Db2</h3><p>Prepared on the real database, never run: "Did you mean CLIENT?"</p></div>
+      <div class="card bar"><h3>Team brain in IBM Db2</h3><p>Rules and decisions in Db2 vector tables. Every check audited per AI agent.</p></div>
+    </div>
+  </div>
+</template>
+
+<template id="t-video">
+  <div class="vidwrap">
+    <video id="mainvid" src="shipsafe-video.mp4" playsinline preload="auto" controls></video>
+    <div class="missing" id="vidmissing"><img src="img/shippy-thinking.png" alt="" style="width:140px">The video is still being edited.<br><span class="faint" style="font-size:16px">Press → to continue.</span></div>
+  </div>
+</template>
+
+<template id="t-live">
+  <div class="eyebrow">Live, on this laptop</div>
+  <div style="display:flex;align-items:center;flex:1;gap:50px">
+    <div style="flex:1">
+      <h1 style="font-size:64px">Now let's see it <span class="gold">live.</span></h1>
+      <div style="margin-top:44px">
+        <div class="check"><b>01</b><span>Granite's fix, <span class="gold">verified</span> by the same checks</span></div>
+        <div class="check"><b>02</b><span>A typo'd query, caught by <span class="gold">real IBM Db2</span></span></div>
+        <div class="check"><b>03</b><span>Every AI agent, <span class="gold">guarded and recorded</span> in Db2</span></div>
+      </div>
+    </div>
+    <div style="text-align:center;flex:none">
+      <img src="img/shippy-alert.png" alt="Shippy on watch" class="shippy" style="width:230px">
+      <div style="margin-top:22px"><button class="btn ghost" data-backup>Play backup recording</button></div>
+    </div>
+  </div>
+  <div class="vidwrap" id="backupwrap" style="display:none;background:#000;z-index:2">
+    <video id="backupvid" src="live-backup.mp4" playsinline preload="none" controls></video>
+  </div>
+</template>
+
+<template id="t-criteria">
+  <div class="eyebrow">Why it wins, by your criteria</div>
+  <h2>IBM Db2 is the brain, not a decoration.</h2>
+  <div class="grid" style="grid-template-columns:repeat(3,1fr);margin-top:30px">
+    <div class="card hero"><h3>Db2 usage <span class="pts">27 pts</span></h3><p>2 native VECTOR(384) stores · VECTOR_DISTANCE · SQL PREPARE validation · 3 SQL PL procedures · MERGE, window views · full audit trail</p></div>
+    <div class="card"><h3>Innovation <span class="pts">20 pts</span></h3><p>Checks before code exists · AI fixes must pass deterministic checks · enforced pre-write hook in Claude Code</p></div>
+    <div class="card"><h3>Architecture &amp; AI <span class="pts">16 pts</span></h3><p>One MCP server, 11 tools · CrewAI on Granite · LangChain + Haystack on Db2 · SQLAlchemy catalog</p></div>
+    <div class="card"><h3>Reproducibility <span class="pts">15 pts</span></h3><p>Extension installs its own engine and can start Db2 in Docker · fresh-machine tests on Windows and Linux</p></div>
+    <div class="card"><h3>Security <span class="pts">12 pts</span></h3><p>All local · SQL never executed · parameter markers · least-privilege Db2 role · secrets in a private file</p></div>
+    <div class="card"><h3>Docs &amp; demo <span class="pts">10 pts</span></h3><p>228 tests on real Db2 + Granite, zero mocks · live proof in real IBM Bob and Claude Code</p></div>
+  </div>
+</template>
+
+<template id="t-vision">
+  <div class="eyebrow">Vision and scale</div>
+  <h2 style="font-size:38px"><span class="muted">Skills tell the AI what it should do.</span><br><span class="gold">ShipSafe checks what it actually did.</span></h2>
+  <div class="grid" style="grid-template-columns:repeat(3,1fr);margin-top:34px">
+    <div class="card"><h3 style="color:var(--green)">Today</h3><p>Works in IBM Bob, VS Code, Claude Code and Cursor over MCP. A safety net on every saved file. Enforced in Claude Code.</p></div>
+    <div class="card"><h3 class="gold">Next</h3><p>Pre-write hooks wherever agents support them, so the check can't be skipped. Org policy packs in a shared Db2.</p></div>
+    <div class="card"><h3 style="color:var(--blue)">Then</h3><p>The same engine as a CI gate. More languages. Blocked patterns and accepted fixes in Db2 improve the rules.</p></div>
+  </div>
+  <p class="lead" style="font-size:19px;margin-top:30px"><b style="color:var(--fg)">Scale:</b> every laptop runs its own checks and Granite (no GPU bill, no code leaves the machine). The whole team shares one IBM Db2 for rules, memory and the audit of every AI agent, with Db2's HADR and pureScale behind it.</p>
+</template>
+
+<template id="t-close">
+  <div style="display:flex;align-items:center;flex:1;gap:56px">
+    <img src="img/shippy-celebrate.png" alt="Shippy celebrates" class="shippy" style="width:300px">
+    <div>
+      <p class="lead" style="font-size:32px">Your AI writes the code.</p>
+      <h1 style="margin-top:8px">ShipSafe makes it<br><span class="gold">shippable.</span></h1>
+      <p style="font-family:var(--mono);font-size:28px;font-weight:600;margin-top:30px">shipsafe-bob.vercel.app</p>
+      <p class="faint" style="font-size:17px;margin-top:10px">Free · open source · install it now in IBM Bob or VS Code</p>
+    </div>
+  </div>
+</template>
+
+<template id="t-bob">
+  <div class="eyebrow">Proof in real IBM Bob</div>
+  <h2 style="font-size:32px">Bob's own agent asks ShipSafe before it writes.</h2>
+  <div style="display:flex;gap:30px;margin-top:26px;align-items:flex-start">
+    <div class="shot" style="width:720px;flex:none"><img src="img/bob-agent.png" alt="IBM Bob agent: recall, Db2 schema, SQL check, code check clean, then write"></div>
+    <div style="font-size:17px">
+      <div class="check" style="font-size:17px"><b>1</b><span>shipsafe_recall: team decisions from Db2</span></div>
+      <div class="check" style="font-size:17px"><b>2</b><span>shipsafe_db2_schema: the real tables</span></div>
+      <div class="check" style="font-size:17px"><b>3</b><span>shipsafe_check_sql ×2: valid on Db2</span></div>
+      <div class="check" style="font-size:17px"><b>4</b><span>shipsafe_check_code: "clean, safe to write"</span></div>
+      <div class="check" style="font-size:17px"><b>5</b><span>Writes the file with ? markers</span></div>
+      <div class="check" style="font-size:17px"><b>6</b><span>shipsafe_readiness_check</span></div>
+    </div>
+  </div>
+</template>
+
+<template id="t-enforce">
+  <div class="eyebrow">Enforced and accounted for</div>
+  <h2 style="font-size:32px">If an agent skips the check, it still can't slip through.</h2>
+  <div class="grid" style="grid-template-columns:1fr 1fr;margin-top:34px">
+    <div class="card"><h3 style="color:var(--red)">Claude Code hook</h3><p>"I couldn't create deploy.py: the ShipSafe pre-write hook blocked it as a high-severity command-injection risk."</p></div>
+    <div class="card"><h3 class="gold">Shippy's safety net</h3><p>Every file saved or written to disk is checked, whether you or an agent wrote it.</p></div>
+    <div class="card"><h3 style="color:var(--blue)">Per-agent audit in Db2</h3><p>SP_GUARD_SUMMARY: checks, blocks and verified fixes for Bob (mcp-use), Claude Code and VS Code.</p></div>
+    <div class="card"><h3 style="color:var(--green)">Verified fixes</h3><p>The demo file, fixed by Granite and verified 3 times out of 3 (1 to 2 rounds).</p></div>
+  </div>
+</template>
+
+<template id="t-arch">
+  <div class="eyebrow">Architecture</div>
+  <h2 style="font-size:32px">One MCP server. One IBM Db2. Local Granite.</h2>
+  <div style="display:flex;gap:30px;margin-top:26px;align-items:flex-start">
+    <div class="shot" style="width:760px;flex:none;background:#fff"><img src="img/diagram.png" alt="ShipSafe architecture diagram"></div>
+    <div style="font-size:15px;line-height:1.35">
+      <p><b>ibm_db</b><br><span class="muted">tables, transactions, procedures</span></p><br>
+      <p><b>SQLAlchemy + ibm_db_sa</b><br><span class="muted">live catalog for "did you mean"</span></p><br>
+      <p><b>LangChain + langchain-db2</b><br><span class="muted">policy vectors, standards Q&amp;A</span></p><br>
+      <p><b>Haystack + ibm-db-haystack</b><br><span class="muted">project memory</span></p><br>
+      <p><b>CrewAI</b><br><span class="muted">analyst → engineer fix crew</span></p><br>
+      <p><b>Ollama + Granite</b><br><span class="muted">granite4:micro, granite-embedding:30m</span></p>
+    </div>
+  </div>
+</template>
+
+<script>
+const MODES = {
+  live: ["hook", "problem", "meet", "video", "live", "criteria", "vision", "close"],
+  deck: ["hook", "problem", "meet", "criteria", "vision", "close", "bob", "enforce", "arch"],
+};
+const stage = document.getElementById("stage");
+let order = [], idx = 0, mode = null;
+
+function fit() {
+  const s = Math.min(innerWidth / 1280, innerHeight / 720);
+  stage.style.transform = `scale(${s})`;
+}
+addEventListener("resize", fit); fit();
+
+function build(m) {
+  mode = m; idx = 0; stage.innerHTML = "";
+  order = MODES[m];
+  order.forEach((id, i) => {
+    const sec = document.createElement("section");
+    sec.className = "slide"; sec.dataset.id = id;
+    sec.setAttribute("aria-label", `Slide ${i + 1}`);
+    sec.appendChild(document.getElementById("t-" + id).content.cloneNode(true));
+    if (id !== "video" && id !== "hook" && id !== "close") {
+      const f = document.createElement("div"); f.className = "foot";
+      f.innerHTML = `<span>ShipSafe for IBM Bob · shipsafe-bob.vercel.app</span><span>${i + 1}</span>`;
+      sec.appendChild(f);
+    }
+    stage.appendChild(sec);
+  });
+  const v = stage.querySelector("#mainvid");
+  if (v) {
+    v.addEventListener("ended", () => go(idx + 1));
+    v.addEventListener("error", () => { v.style.display = "none"; stage.querySelector("#vidmissing").style.display = "flex"; });
+  }
+  const b = stage.querySelector("[data-backup]");
+  if (b) b.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const w = stage.querySelector("#backupwrap"), bv = stage.querySelector("#backupvid");
+    w.style.display = "block"; bv.play().catch(() => {});
+  });
+  document.getElementById("chooser").style.display = "none";
+  try { localStorage.setItem("pitch-mode", m); } catch (e) {}
+  location.hash = m;
+  show();
+}
+
+function show() {
+  const slides = stage.querySelectorAll(".slide");
+  slides.forEach((s, i) => s.classList.toggle("on", i === idx));
+  stage.querySelectorAll("video").forEach((v) => { if (!v.closest(".slide.on")) v.pause(); });
+  const cur = slides[idx];
+  if (cur && cur.dataset.id === "video") { const v = cur.querySelector("video"); v.currentTime = 0; v.play().catch(() => {}); }
+  if (cur && cur.dataset.id !== "live") { const w = stage.querySelector("#backupwrap"); if (w) w.style.display = "none"; }
+  document.getElementById("count").textContent = `${idx + 1} / ${slides.length}`;
+  document.getElementById("progress").style.width = `${((idx + 1) / slides.length) * 100}%`;
+}
+function go(n) { if (!mode) return; idx = Math.max(0, Math.min(order.length - 1, n)); show(); }
+
+document.querySelectorAll(".opt").forEach((b) => b.addEventListener("click", () => build(b.dataset.mode)));
+document.getElementById("prev").onclick = (e) => { e.stopPropagation(); go(idx - 1); };
+document.getElementById("next").onclick = (e) => { e.stopPropagation(); go(idx + 1); };
+document.getElementById("menu").onclick = (e) => { e.stopPropagation(); mode = null; stage.innerHTML = ""; document.getElementById("chooser").style.display = "flex"; history.replaceState(null, "", location.pathname); };
+function full() { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen().catch(() => {}); }
+document.getElementById("full").onclick = (e) => { e.stopPropagation(); full(); };
+addEventListener("keydown", (e) => {
+  if (!mode) return;
+  if (["ArrowRight", "PageDown", " "].includes(e.key) && e.target.tagName !== "VIDEO") { e.preventDefault(); go(idx + 1); }
+  else if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); go(idx - 1); }
+  else if (e.key === "Home") go(0);
+  else if (e.key === "End") go(order.length - 1);
+  else if (e.key.toLowerCase() === "f") full();
+  else if (e.key === "Escape" && !document.fullscreenElement) document.getElementById("menu").click();
+});
+document.getElementById("wrap").addEventListener("click", (e) => {
+  if (!mode || e.target.closest("video,button,a")) return;
+  go(e.clientX > innerWidth / 3 ? idx + 1 : idx - 1);
+});
+const start = location.hash.slice(1);
+if (MODES[start]) build(start);
+</script>
+</body>
+</html>
